@@ -8,12 +8,14 @@
   flex-grow: 1;
   display: flex;
   flex-direction: row;
-  min-height: 5em;;
+  min-height: 5em;
+  background-color: #323232;
+
 }
 
 header {
   min-height: 4em;
-  border-bottom: 1px solid black;
+  background-color: #49925a;
 }
 
 .map {
@@ -22,6 +24,23 @@ header {
 
 aside {
   min-width: max-content;
-  border-right: 1px solid black;
   overflow: auto;
+}
+.mat-mdc-subheader {
+  color: white;
+  font-size: 15pt;
+}
+.mat-mdc-list-item:hover {
+  background-color: #1E1E1EFF;
+}
+.mat-mdc-list-item-title {
+    color: white !important;
+    font-size: 12pt;
+  }
+.mat-mdc-list-item-line {
+  color: white;
+  font-size: 8pt;
+}
+.mat-mdc-list-item-icon{
+  color: white !important;
 }
