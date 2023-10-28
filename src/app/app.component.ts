@@ -15,7 +15,7 @@ import * as L from 'leaflet';
 export class AppComponent implements ServiceSubscribers{
   options = {
     layers: [
-      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 18, attribution: '...' })
+      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 15, attribution: '...' })
     ],
     zoom: 13,
     center: [50.5558, 9.6808] as LatLngTuple
@@ -36,7 +36,7 @@ export class AppComponent implements ServiceSubscribers{
     this.layers.push(m);
     // Fügen Sie hier weitere Marker hinzu, wenn Sie möchten
      */
-    this.a2c.getCoordinatesFromAddress("Am roten Rain 15, Petersberg")
+    this.a2c.getCoordinatesFromAddress("Leipziger Str. 123, Fulda")
   }
 
   onEvent(b: BackendEvent): void {
