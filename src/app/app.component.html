@@ -1,7 +1,6 @@
-<canvas
-  baseChart
-  [datasets]="dataset.datasets"
-  type="line"
-  [labels]="labels"
->
-</canvas>
+<div leaflet
+     [leafletOptions]="options"
+     [leafletLayers]="layers"
+     (leafletMapReady)="onMapReady($event)"
+     style="height: 500px;">
+</div>
