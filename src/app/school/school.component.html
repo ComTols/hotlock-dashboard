@@ -1,1 +1,19 @@
-<p>school works!</p>
+<header>
+	<button mat-icon-button (click)="_location.back();">
+		<mat-icon>arrow_back</mat-icon>
+	</button>
+	<span>Schule: {{school?.name}}</span>
+	<span class="spacer"></span>
+	<button mat-icon-button>
+		<mat-icon>edit</mat-icon>
+	</button>
+</header>
+
+<mat-grid-list cols="4">
+	<mat-grid-tile *ngFor="let tile of tiles"
+	               [colspan]="tile.size.col"
+	               [rowspan]="tile.size.row"
+	>
+		<div [chart]="mapDashboardTileToChart(tile)"></div>
+	</mat-grid-tile>
+</mat-grid-list>
