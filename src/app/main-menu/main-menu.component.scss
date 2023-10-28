@@ -1,0 +1,27 @@
+.windows_separator {
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+}
+
+.justify {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  min-height: 5em;;
+}
+
+header {
+  min-height: 4em;
+  border-bottom: 1px solid black;
+}
+
+.map {
+  flex-grow: 1;
+}
+
+aside {
+  min-width: max-content;
+  border-right: 1px solid black;
+  overflow: auto;
+}

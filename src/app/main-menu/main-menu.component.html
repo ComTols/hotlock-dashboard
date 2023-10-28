@@ -1,1 +1,24 @@
-<p>main-menu works!</p>
+<div class="windows_separator">
+  <header>Inahlt</header>
+  <div class="justify">
+    <aside>
+      <mat-list role="list">
+        <div mat-subheader>Schulen</div>
+        <ng-container *ngFor="let school of schools">
+          <mat-list-item>
+            <mat-icon matListItemIcon>school</mat-icon>
+            <div matListItemTitle>{{school.name}}</div>
+            <div matListItemLine>{{school.address}}</div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </ng-container>
+      </mat-list>
+    </aside>
+    <div class="map" leaflet
+         [leafletOptions]="options"
+         [leafletLayers]="layers"
+         (leafletMapReady)="onMapReady($event)"
+    >
+    </div>
+  </div>
+</div>

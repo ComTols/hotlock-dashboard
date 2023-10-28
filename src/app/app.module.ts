@@ -12,6 +12,10 @@ import { MainMenuComponent } from './main-menu/main-menu.component';
 import { SchoolComponent } from './school/school.component';
 import { RoomComponent } from './room/room.component';
 
+import {MatListModule} from '@angular/material/list';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatIconModule} from '@angular/material/icon';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +28,11 @@ import { RoomComponent } from './room/room.component';
     BrowserModule,
     AppRoutingModule,
     NgChartsModule,
-    LeafletModule,HttpClientModule
+    LeafletModule,
+    HttpClientModule,
+    MatListModule,
+    MatDividerModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
