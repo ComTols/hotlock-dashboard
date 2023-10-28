@@ -6,13 +6,28 @@ header {
   padding: 0 2em;
   align-items: center;
 }
+
 h1 {
   color: white;
   margin-left: 20px;
 }
-.mat-icon{
+
+.mat-icon {
   color: white;
 }
+
 .spacer {
   flex-grow: 1;
+}
+
+.select-room {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+}
+
+.room-continue {
+  cursor: pointer !important;
 }

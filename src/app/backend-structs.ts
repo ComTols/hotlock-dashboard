@@ -6,24 +6,79 @@ export interface School {
 }
 
 export interface DashboardTile {
-    size: {
+    size?: {
         col: number
         row: number
     }
-    position: {
+    position?: {
         col: number
         row: number
     }
     options: {
         type: string
-        title: string
-        yAxis: {
-            unit: string,
-            title: string
+        title?: string
+        yAxis?: {
+            unit?: string,
+            title?: string
         }
-        xAxis: {
-            categories: string[]
-            title: string
+        xAxis?: {
+            categories?: string[]
+            title?: string
         }
+        requestKey: "temperatur"
     }
+}
+
+export interface Answer {
+    access: boolean
+    content: any
+    error: string[]
+    msg: string
+}
+
+export interface GetSchoolsAnswer extends Answer {
+    content: School[]
+}
+
+export interface GetSchoolAnswer extends Answer {
+    content: School
+}
+
+export interface GetGebaeudeAnswer extends Answer {
+    content: Gebaeude[]
+}
+
+export interface GetEtageAnswer extends Answer {
+    content: Etage[]
+}
+
+export interface GetRoomsAnswer extends Answer {
+    content: Room[]
+}
+
+export interface School {
+    adresse: string,
+    id: string,
+    kuerzel: string,
+    name: string
+}
+
+export interface Gebaeude {
+    id: string,
+    name: string,
+    school: string
+}
+
+export interface Etage {
+    etage: number,
+    gebaeude: string,
+    id: string
+}
+
+export interface Room {
+    etage: string,
+    id: string,
+    nr: string,
+    solltemp: number,
+    type: string
 }

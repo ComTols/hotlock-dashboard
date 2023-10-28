@@ -1,26 +1,26 @@
 <div class="windows_separator">
-  <header>
-    <img class ="svg" src = "assets/logo-weiß.svg" alt="SVG Logo HotLock"/>
-    <h1>Hauptmenü</h1>
-    <span class="spacer"></span>
-    <form class="search-form">
-      <mat-form-field class="search-full-width">
-        <input type="search" matInput placeholder="Suche...">
-        <mat-icon matSuffix>search</mat-icon>
-      </mat-form-field>
-    </form>
-    <button mat-icon-button>
-      <mat-icon>settings</mat-icon>
-    </button>
-    <button mat-icon-button>
-      <mat-icon>logout</mat-icon>
-    </button>
-  </header>
+	<header>
+		<img class="svg" src="assets/logo-weiß.svg" alt="SVG Logo HotLock"/>
+		<h1>Hauptmenü</h1>
+		<span class="spacer"></span>
+		<form class="search-form">
+			<mat-form-field class="search-full-width">
+				<input type="search" matInput placeholder="Suche...">
+				<mat-icon matSuffix>search</mat-icon>
+			</mat-form-field>
+		</form>
+		<button mat-icon-button>
+			<mat-icon>settings</mat-icon>
+		</button>
+		<button mat-icon-button>
+			<mat-icon>logout</mat-icon>
+		</button>
+	</header>
 	<div class="justify">
 		<aside>
 			<mat-list role="list">
 				<div mat-subheader>Schulen</div>
-				<ng-container *ngFor="let school of schools">
+				<ng-container *ngFor="let school of backend.schools">
 					<mat-list-item (click)="onClickMarker(school)">
 						<mat-icon matListItemIcon>school</mat-icon>
 						<div matListItemTitle>{{school.name}}</div>

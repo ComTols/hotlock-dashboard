@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 import {LatLngTuple, Map, marker, Marker, tileLayer} from "leaflet";
 import {AddressToCoordinatesService} from "../address-to-coordinates.service";
-import {AddressToCoordinatesEvent, BackendEvent} from "../backend-events";
+import {AddressToCoordinatesEvent, BackendEvent, GetSchoolsEvent} from "../backend-events";
 import * as L from "leaflet";
 import {School} from "../backend-structs";
 import {BackendService} from "../backend.service";
@@ -13,20 +13,6 @@ import {Router} from "@angular/router";
     styleUrls: ['./main-menu.component.scss']
 })
 export class MainMenuComponent {
-    public schools: School[] = [
-        {
-            name: "Hochschule Fulda",
-            adresse: "Leipziger Str. 123, Fulda",
-            id: "abcd-1234",
-            kuerzel: "HS"
-        }, {
-            name: "Marianum",
-            adresse: "Brüder-Grimm-Str. 1, Fulda",
-            id: "1234-abcd",
-            kuerzel: "MA"
-        },
-    ]
-
     options = {
         layers: [
             tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 15, attribution: '...'})
@@ -39,22 +25,27 @@ export class MainMenuComponent {
 
     constructor(
         private a2c: AddressToCoordinatesService,
-        private backend: BackendService,
+        public backend: BackendService,
         private router: Router
     ) {
         a2c.subscribers.push(this)
+        backend.subscribers.push(this)
     }
 
     onMapReady(map: Map) {
-        this.schools.forEach(school => {
-            this.a2c.getCoordinatesFromAddress(school.adresse, school)
-        })
+        console.log("Hallo")
+        this.backend.getSchools()
     }
 
     onEvent(b: BackendEvent, data: any): void {
         if (b instanceof AddressToCoordinatesEvent) {
             this.addMarker(b.lon, b.lat, data)
             console.log(b.lon, b.lat)
+        } else if (b instanceof GetSchoolsEvent) {
+            console.log(b.schools)
+            this.backend.schools.forEach(school => {
+                this.a2c.getCoordinatesFromAddress(school.adresse, school)
+            })
         }
     }
 
@@ -77,6 +68,7 @@ export class MainMenuComponent {
     }
 
     onClickMarker(s: School) {
+        this.backend.activeSchool = s
         this.router.navigate(["school", s.id])
     }
 }

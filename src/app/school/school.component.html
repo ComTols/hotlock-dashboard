@@ -2,7 +2,7 @@
 	<button mat-icon-button (click)="_location.back();">
 		<mat-icon>arrow_back</mat-icon>
 	</button>
-	<h1>Schule(das kann dann weg): {{school?.name}}</h1>
+	<h1>{{backend.activeSchool?.name}}</h1>
 	<span class="spacer"></span>
 	<button mat-icon-button>
 		<mat-icon>edit</mat-icon>
@@ -11,9 +11,36 @@
 
 <mat-grid-list cols="4">
 	<mat-grid-tile *ngFor="let tile of tiles"
-	               [colspan]="tile.size.col"
-	               [rowspan]="tile.size.row"
+	               [colspan]="tile.size? tile.size.col : 1"
+	               [rowspan]="tile.size? tile.size.row : 1"
 	>
 		<div [chart]="mapDashboardTileToChart(tile)"></div>
 	</mat-grid-tile>
 </mat-grid-list>
+
+<div class="select-room">
+	<mat-selection-list [multiple]="false" (selectionChange)="onChangeGebaeude($event)">
+		<div mat-subheader>Gebäude</div>
+		<mat-list-option *ngFor="let g of backend.gebaeude" [value]="g">
+			<mat-icon matListItemIcon>house</mat-icon>
+			<div matListItemTitle>{{g.name}}</div>
+		</mat-list-option>
+	</mat-selection-list>
+
+	<mat-selection-list [multiple]="false" (selectionChange)="onChangeEtage($event)">
+		<div mat-subheader>Stockwerk</div>
+		<mat-list-option *ngFor="let e of backend.etages" [value]="e">
+			<mat-icon matListItemIcon>floor</mat-icon>
+			<div matListItemTitle>{{e.etage}}</div>
+		</mat-list-option>
+	</mat-selection-list>
+
+	<mat-list>
+		<div mat-subheader>Raum</div>
+		<mat-list-item class="room-continue" *ngFor="let r of backend.rooms" (click)="onClickRoom(r)">
+			<mat-icon matListItemIcon>chair_alt</mat-icon>
+			<div matListItemTitle>{{r.nr}}</div>
+		</mat-list-item>
+	</mat-list>
+
+</div>
