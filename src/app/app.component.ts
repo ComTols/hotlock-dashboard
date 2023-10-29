@@ -5,6 +5,7 @@ import { LatLngTuple } from 'leaflet';
 import {AddressToCoordinatesService, ServiceSubscribers} from "./address-to-coordinates.service";
 import {AddressToCoordinatesEvent, BackendEvent} from "./backend-events";
 import * as L from 'leaflet';
+import {AuthService} from "./auth.service";
 
 
 @Component({
@@ -13,5 +14,6 @@ import * as L from 'leaflet';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent{
-
+  constructor(private auth:AuthService) {
+  }
 }

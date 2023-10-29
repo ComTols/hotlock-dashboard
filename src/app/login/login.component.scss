@@ -1,0 +1,25 @@
+.login-card {
+  width: 300px;
+  margin: 0 auto;
+  margin-top: 100px;
+  text-align: center;
+  background-color: #49925a;
+  color: white;
+}
+.mat-mdc-card-title {
+  font-size: 20pt;
+}
+
+.full-width {
+  width: 100%;
+  margin: 10px 0;
+}
+button {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #323232 !important;
+  color: white;
+}
+button:hover {
+  background-color: #1E1E1EFF;
+}

@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 
 import { NgChartsModule } from 'ng2-charts';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import { HttpClientModule } from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
 import { SchoolComponent } from './school/school.component';
@@ -21,7 +21,8 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {FormsModule} from "@angular/forms";
-
+import {MatCardModule} from '@angular/material/card';
+import {AuthInterceptorInterceptor} from "./auth-interceptor.interceptor";
 @NgModule({
     declarations: [
         AppComponent,
@@ -44,9 +45,16 @@ import {FormsModule} from "@angular/forms";
       MatButtonModule,
       FormsModule,
       MatFormFieldModule,
-      MatInputModule
+      MatInputModule,
+      MatCardModule
     ],
-    providers: [],
+    providers: [
+      {
+        provide: HTTP_INTERCEPTORS,
+        useClass: AuthInterceptorInterceptor,
+        multi: true
+      }
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

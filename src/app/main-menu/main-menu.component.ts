@@ -6,6 +6,7 @@ import * as L from "leaflet";
 import {School} from "../backend-structs";
 import {BackendService} from "../backend.service";
 import {Router} from "@angular/router";
+import {AuthService} from "../auth.service";
 
 @Component({
     selector: 'app-main-menu',
@@ -26,14 +27,14 @@ export class MainMenuComponent {
     constructor(
         private a2c: AddressToCoordinatesService,
         public backend: BackendService,
-        private router: Router
+        private router: Router,
+        private auth: AuthService
     ) {
         a2c.subscribers.push(this)
         backend.subscribers.push(this)
     }
 
     onMapReady(map: Map) {
-        console.log("Hallo")
         this.backend.getSchools()
     }
 
@@ -70,5 +71,8 @@ export class MainMenuComponent {
     onClickMarker(s: School) {
         this.backend.activeSchool = s
         this.router.navigate(["school", s.id])
+    }
+    onClickLogout(e: any) {
+      this.auth.logout()
     }
 }

@@ -34,6 +34,7 @@ export interface Answer {
     content: any
     error: string[]
     msg: string
+    token: string
 }
 
 export interface GetSchoolsAnswer extends Answer {
