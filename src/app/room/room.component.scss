@@ -19,3 +19,30 @@ h1 {
 .spacer {
   flex-grow: 1;
 }
+body {
+  background-color: #f0f0f0;
+}
+
+.select-room {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+
+  justify-content: center;
+  margin: 25px;
+}
+
+.room-continue {
+  cursor: pointer !important;
+}
+
+.chart {
+  min-width: 18em;
+  min-height: 18em;
+  flex-grow: 1;
+  align-self: stretch;
+  border: solid;
+  border-color: #d7d7d7;
+  margin: 10px;
+  background-color: white;
+}

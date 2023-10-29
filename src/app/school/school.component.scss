@@ -1,3 +1,6 @@
+body {
+  background-color: #f0f0f0;
+}
 header {
   min-height: 4em;
   background-color: #49925a;
@@ -26,6 +29,7 @@ h1 {
   flex-direction: row;
 
   justify-content: center;
+  margin: 25px;
 }
 
 .room-continue {
@@ -37,4 +41,23 @@ h1 {
   min-height: 18em;
   flex-grow: 1;
   align-self: stretch;
+  border: solid;
+  border-color: #d7d7d7;
+  margin: 10px;
+  background-color: white;
+}
+.mat-mdc-selection-list {
+  width: 20em;
+  background-color: white;
+  border: solid;
+  border-color: #d7d7d7;
+}
+.mat-mdc-radio-selected-icon {
+  color: #49925a !important;
+}
+.mat-mdc-list {
+  width: 20em;
+  background-color: white;
+  border: solid;
+  border-color: #d7d7d7;
 }

@@ -1,23 +1,24 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {
-    DashboardTile, Etage,
-    Gebaeude,
-    GetEtageAnswer,
-    GetGebaeudeAnswer, GetRoomAnswer, GetRoomsAnswer,
-    GetSchoolAnswer,
-    GetSchoolsAnswer, Room,
-    School
+  DashboardTile, Etage,
+  Gebaeude,
+  GetEtageAnswer,
+  GetGebaeudeAnswer, GetRoomAnswer, GetRoomsAnswer,
+  GetSchoolAnswer,
+  GetSchoolsAnswer, GetTemperaturesAnswer, Room,
+  School
 } from "./backend-structs";
 import {ServiceSubscribers} from "./address-to-coordinates.service";
 import {
-    GetEtageEvent,
-    GetGebaeudeEvent,
-    GetRoomEvent,
-    GetRoomsEvent,
-    GetSchoolEvent,
-    GetSchoolsEvent
+  GetEtageEvent,
+  GetGebaeudeEvent,
+  GetRoomEvent,
+  GetRoomsEvent,
+  GetSchoolEvent,
+  GetSchoolsEvent, GetTemperaturesEvent
 } from "./backend-events";
+import {Chart} from "angular-highcharts";
 
 @Injectable({
     providedIn: 'root'
@@ -112,8 +113,33 @@ export class BackendService {
             })
         })
     }
-
+    getTemperatures(c: Chart) {
+      if (!this.activeRoom) return;
+      this.http.get<GetTemperaturesAnswer>(BackendService.URL + "/gettemperatur/" + encodeURIComponent(this.activeRoom!.id) + "/" + encodeURIComponent(new Date().toISOString().split("T")[0])).subscribe(value => {
+        console.log(value)
+        this.subscribers.forEach(sub => {
+          sub.onEvent(new GetTemperaturesEvent(value.content), c)
+        })
+      })
+    }
     getDashboard(): DashboardTile[] {
+      if (this.activeRoom) {
+        return [{
+          size: {
+            col: 2,
+            row: 2
+          },
+          options: {
+            title: "Temperaturverlauf",
+            type: "line",
+            requestKey: "temperature",
+            yAxis: {
+              title: "Temperatur",
+              unit: "°C"
+            }
+          }
+        }]
+      }
         return [
             {
                 size: {
@@ -138,7 +164,7 @@ export class BackendService {
                 }
             }, {
                 size: {
-                    col: 2,
+                    col: 1,
                     row: 2
                 },
                 options: {
@@ -146,7 +172,24 @@ export class BackendService {
                     type: "pie",
                     requestKey: "expenditure"
                 }
+            }, {
+            size: {
+              col: 1,
+              row: 2
+            },
+            options: {
+              title: "Auslastung der Räume",
+              type: "bar",
+              requestKey: "usage_2",
+              xAxis: {
+                categories: ["Geb. 31", "Geb. 46", "Geb. 21"]
+              },
+              yAxis: {
+                title: "Auslastung",
+                unit: "%"
+              }
             }
+          }
         ]
     }
 
@@ -172,7 +215,24 @@ export class BackendService {
                     ]
                 }
                 ]
+          case "usage_2":
+              return[
+                {
+                  name: "Wert", data: [
+                    75,
+                    54,
+                    90
+                  ]
+                }
+              ]
         }
         return []
+    }
+
+    getRoomData(d: DashboardTile, c: Chart) {
+      switch(d.options.requestKey) {
+        case "temperature":
+          this.getTemperatures(c)
+      }
     }
 }

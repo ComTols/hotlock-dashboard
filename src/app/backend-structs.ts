@@ -31,7 +31,7 @@ export interface DashboardTile {
             categories?: string[]
             title?: string
         }
-        requestKey: "usage" | "expenditure"
+        requestKey: "usage" | "expenditure" | "usage_2" | "temperature"
     }
 }
 
@@ -85,6 +85,8 @@ export interface Answer {
 
 export interface GetSchoolsAnswer extends Answer {
     content: School[]
+}export interface GetTemperaturesAnswer extends Answer {
+    content: Temperature[]
 }
 
 export interface GetSchoolAnswer extends Answer {
@@ -112,6 +114,12 @@ export interface School {
     id: string,
     kuerzel: string,
     name: string
+}
+export interface Temperature {
+    "id": string,
+    "raum": string,
+    "value": number,
+    "zeitpunkt": string
 }
 
 export interface Gebaeude {

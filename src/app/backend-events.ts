@@ -1,4 +1,4 @@
-import {Etage, Gebaeude, Room, School} from "./backend-structs";
+import {Etage, Gebaeude, Room, School, Temperature} from "./backend-structs";
 
 export class BackendEvent {
 }
@@ -60,12 +60,20 @@ export class GetRoomsEvent extends BackendEvent {
 }
 
 export class GetRoomEvent extends BackendEvent {
-    public room: Room
+  public room: Room
 
-    constructor(r: Room) {
-        super();
-        this.room = r;
-    }
+  constructor(r: Room) {
+    super();
+    this.room = r;
+  }
+}
+export class GetTemperaturesEvent extends BackendEvent {
+  public temperatures: Temperature[]
+
+  constructor(t: Temperature[]) {
+    super();
+    this.temperatures = t;
+  }
 }
 
 export class LogInEvent extends BackendEvent {

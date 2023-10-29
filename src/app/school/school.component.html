@@ -1,3 +1,4 @@
+<body>
 <header>
 	<button class="icon" mat-icon-button (click)="_location.back();">
 		<mat-icon>arrow_back</mat-icon>
@@ -14,12 +15,13 @@
 	               [colspan]="tile.size? tile.size.col : 1"
 	               [rowspan]="tile.size? tile.size.row : 1"
 	>
-		<div [chart]="charts[i]" class="chart"></div>
+
+    <div [chart]="charts[i]" class="chart"></div>
 	</mat-grid-tile>
 </mat-grid-list>
 
 <div class="select-room">
-	<mat-selection-list [multiple]="false" (selectionChange)="onChangeGebaeude($event)">
+	<mat-selection-list class="selection" [multiple]="false" (selectionChange)="onChangeGebaeude($event)">
 		<div mat-subheader>Gebäude</div>
 		<mat-list-option *ngFor="let g of backend.gebaeude" [value]="g">
 			<mat-icon matListItemIcon>house</mat-icon>
@@ -27,7 +29,7 @@
 		</mat-list-option>
 	</mat-selection-list>
 
-	<mat-selection-list [multiple]="false" (selectionChange)="onChangeEtage($event)">
+	<mat-selection-list class="selection" [multiple]="false" (selectionChange)="onChangeEtage($event)">
 		<div mat-subheader>Stockwerk</div>
 		<mat-list-option *ngFor="let e of backend.etages" [value]="e">
 			<mat-icon matListItemIcon>floor</mat-icon>
@@ -44,3 +46,4 @@
 	</mat-list>
 
 </div>
+</body>
