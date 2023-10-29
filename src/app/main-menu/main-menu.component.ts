@@ -42,10 +42,11 @@ export class MainMenuComponent {
         if (b instanceof AddressToCoordinatesEvent) {
             this.addMarker(b.lon, b.lat, data)
             console.log(b.lon, b.lat)
+          this.a2c.getCoordinatesFromAddress()
         } else if (b instanceof GetSchoolsEvent) {
             console.log(b.schools)
             this.backend.schools.forEach(school => {
-                this.a2c.getCoordinatesFromAddress(school.adresse, school)
+                this.a2c.getCoordinatesFromAddress()
             })
         }
     }
