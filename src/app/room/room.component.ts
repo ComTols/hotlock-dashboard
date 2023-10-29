@@ -42,7 +42,7 @@ export class RoomComponent implements ServiceSubscribers {
             this.backend.getRoomData(t, c)
 
             // @ts-ignore
-            backend.getSchoolData(t).forEach(s => {
+            this.backend.getSchoolData(t).forEach(s => {
               // @ts-ignore
               c.addSeries(s, true, true)
             })
