@@ -107,22 +107,58 @@ export class BackendService {
                     row: 2
                 },
                 options: {
-                    title: "Test",
+                    title: "Tagesverbrauch",
                     type: "line",
-                    requestKey: "temperatur"
+                    requestKey: "usage",
+                    xAxis: {
+                        categories: ["0h", "1h", "2h", "3h", "4h", "5h", "6h", "7h", "8h", "9h", "10h", "11h", "12h", "13h", "14h", "15h", "16h", "17h", "18h", "19h", "20h", "21h", "22h", "23h"]
+                    },
+                    yAxis: {
+                        title: "Verbrauch",
+                        unit: "kw/h"
+                    },
+                    yAxis2: {
+                        title: "Außentemperatur",
+                        unit: "°C"
+                    }
                 }
-            },
-            {
+            }, {
                 size: {
                     col: 2,
                     row: 2
                 },
                 options: {
-                    title: "Test2",
-                    type: "line",
-                    requestKey: "temperatur"
+                    title: "Ausgaben",
+                    type: "pie",
+                    requestKey: "expenditure"
                 }
             }
         ]
+    }
+
+    getSchoolData(d: DashboardTile): { name: string, data: any[], yAxis?: number }[] {
+        switch (d.options.requestKey) {
+            case "usage":
+                return [{
+                    name: "Verbrauch",
+                    data: [2, 2, 2, 2, 5, 10, 7, 7, 7, 6, 6, 7, 5, 4, 3, 7, 7, 2, 2, 2, 2, 2, 2, 2],
+                    yAxis: 0
+                }, {
+                    name: "Temperatur",
+                    data: [8, 8, 8, 9, 10, 12, 12, 13, 12, 14, 13, 14, 11, 10, 8, 8, 7, 7, 7, 5, 5, 5, 6, 6],
+                    yAxis: 1
+                }]
+            case "expenditure":
+                return [{
+                    name: "Brands", data: [
+                        {name: 'Heizung', y: 61.41, sliced: true, selected: true},
+                        {name: 'Wasser', y: 11.84},
+                        {name: 'Strom', y: 10.85},
+                        {name: 'Wartung', y: 4.67}
+                    ]
+                }
+                ]
+        }
+        return []
     }
 }

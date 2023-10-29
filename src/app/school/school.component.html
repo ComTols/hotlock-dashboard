@@ -9,12 +9,12 @@
 	</button>
 </header>
 
-<mat-grid-list cols="4">
-	<mat-grid-tile *ngFor="let tile of tiles"
+<mat-grid-list cols="4" rowHeight="200px">
+	<mat-grid-tile *ngFor="let tile of tiles, index as i"
 	               [colspan]="tile.size? tile.size.col : 1"
 	               [rowspan]="tile.size? tile.size.row : 1"
 	>
-		<div [chart]="mapDashboardTileToChart(tile)"></div>
+		<div [chart]="charts[i]" class="chart"></div>
 	</mat-grid-tile>
 </mat-grid-list>
 

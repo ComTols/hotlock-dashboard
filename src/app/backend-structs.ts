@@ -21,11 +21,15 @@ export interface DashboardTile {
             unit?: string,
             title?: string
         }
+        yAxis2?: {
+            unit?: string,
+            title?: string
+        }
         xAxis?: {
             categories?: string[]
             title?: string
         }
-        requestKey: "temperatur"
+        requestKey: "usage" | "expenditure"
     }
 }
 

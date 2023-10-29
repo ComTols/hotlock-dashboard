@@ -16,7 +16,7 @@ import {MatSelectionListChange} from "@angular/material/list";
 export class SchoolComponent implements ServiceSubscribers {
 
     public tiles: DashboardTile[] = []
-    public charts?: Chart[];
+    public charts: Chart[] = [];
 
     private id: string | null
 
@@ -28,6 +28,17 @@ export class SchoolComponent implements ServiceSubscribers {
     ) {
         backend.subscribers.push(this)
         this.tiles = backend.getDashboard();
+        this.tiles.forEach(t => {
+            var c = this.mapDashboardTileToChart(t)
+            this.charts.push(c)
+
+            // @ts-ignore
+            backend.getSchoolData(t).forEach(s => {
+                // @ts-ignore
+                c.addSeries(s, true, true)
+            })
+        })
+
         this.id = route.snapshot.paramMap.get("id")
 
         if (!(backend.activeSchool)) {
@@ -58,14 +69,26 @@ export class SchoolComponent implements ServiceSubscribers {
             credits: {
                 enabled: false
             },
-            yAxis: {
+            yAxis: [{
                 labels: {
-                    format: '{value}' + d.options.yAxis?.unit
+                    formatter: function () {
+                        return this.value + (d.options.yAxis?.unit ? d.options.yAxis?.unit : "")
+                    }
                 },
                 title: {
                     text: d.options.yAxis?.title
                 }
-            },
+            }, {
+                labels: {
+                    formatter: function () {
+                        return this.value + (d.options.yAxis2?.unit ? d.options.yAxis2?.unit : "")
+                    }
+                },
+                title: {
+                    text: d.options.yAxis2?.title
+                },
+                opposite: true  // Diese Achse wird auf der rechten Seite angezeigt
+            }],
             xAxis: {
                 categories: d.options.xAxis?.categories,
                 title: {

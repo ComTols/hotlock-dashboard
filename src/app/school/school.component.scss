@@ -31,3 +31,10 @@ h1 {
 .room-continue {
   cursor: pointer !important;
 }
+
+.chart {
+  min-width: 18em;
+  min-height: 18em;
+  flex-grow: 1;
+  align-self: stretch;
+}
