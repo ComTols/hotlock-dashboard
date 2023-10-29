@@ -1,3 +1,5 @@
+import {Chart} from "angular-highcharts";
+
 export interface School {
     id: string
     name: string
@@ -33,6 +35,46 @@ export interface DashboardTile {
     }
 }
 
+export function mapDashboardTileToChart(d: DashboardTile): Chart {
+    return new Chart({
+        chart: {
+            type: d.options.type
+        },
+        title: {
+            text: d.options.title
+        },
+        credits: {
+            enabled: false
+        },
+        yAxis: [{
+            labels: {
+                formatter: function () {
+                    return this.value + (d.options.yAxis?.unit ? d.options.yAxis?.unit : "")
+                }
+            },
+            title: {
+                text: d.options.yAxis?.title
+            }
+        }, {
+            labels: {
+                formatter: function () {
+                    return this.value + (d.options.yAxis2?.unit ? d.options.yAxis2?.unit : "")
+                }
+            },
+            title: {
+                text: d.options.yAxis2?.title
+            },
+            opposite: true  // Diese Achse wird auf der rechten Seite angezeigt
+        }],
+        xAxis: {
+            categories: d.options.xAxis?.categories,
+            title: {
+                text: d.options.xAxis?.title
+            }
+        }
+    });
+}
+
 export interface Answer {
     access: boolean
     content: any
@@ -61,6 +103,10 @@ export interface GetRoomsAnswer extends Answer {
     content: Room[]
 }
 
+export interface GetRoomAnswer extends Answer {
+    content: Room
+}
+
 export interface School {
     adresse: string,
     id: string,
@@ -81,9 +127,11 @@ export interface Etage {
 }
 
 export interface Room {
-    etage: string,
+    etage: string | Etage,
     id: string,
     nr: string,
     solltemp: number,
-    type: string
+    type: string,
+    gebaeude?: Gebaeude
+    schule?: School
 }

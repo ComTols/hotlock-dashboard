@@ -1,0 +1,21 @@
+header {
+  min-height: 4em;
+  background-color: #49925a;
+  display: flex;
+  flex-direction: row;
+  padding: 0 2em;
+  align-items: center;
+}
+
+h1 {
+  color: white;
+  margin-left: 20px;
+}
+
+.icon {
+  color: white;
+}
+
+.spacer {
+  flex-grow: 1;
+}

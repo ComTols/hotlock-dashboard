@@ -4,13 +4,20 @@ import {
     DashboardTile, Etage,
     Gebaeude,
     GetEtageAnswer,
-    GetGebaeudeAnswer, GetRoomsAnswer,
+    GetGebaeudeAnswer, GetRoomAnswer, GetRoomsAnswer,
     GetSchoolAnswer,
     GetSchoolsAnswer, Room,
     School
 } from "./backend-structs";
 import {ServiceSubscribers} from "./address-to-coordinates.service";
-import {GetEtageEvent, GetGebaeudeEvent, GetRoomEvent, GetSchoolEvent, GetSchoolsEvent} from "./backend-events";
+import {
+    GetEtageEvent,
+    GetGebaeudeEvent,
+    GetRoomEvent,
+    GetRoomsEvent,
+    GetSchoolEvent,
+    GetSchoolsEvent
+} from "./backend-events";
 
 @Injectable({
     providedIn: 'root'
@@ -87,16 +94,23 @@ export class BackendService {
         if (!(this.activeEtage)) return;
         this.http.get<GetRoomsAnswer>(BackendService.URL + "/getraeume/" + encodeURIComponent(this.activeEtage.id!)).subscribe(
             value => {
-                console.log(value)
                 this.rooms = value.content
-                console.log(this.rooms)
                 this.subscribers.forEach(sub => {
-                    sub.onEvent(new GetEtageEvent(this.etages), null)
+                    sub.onEvent(new GetRoomsEvent(this.rooms), null)
                 })
             }, error => {
                 console.error(error);
             }
         )
+    }
+
+    getRoom(id: string) {
+        this.http.get<GetRoomAnswer>(BackendService.URL + "/getraum/" + encodeURIComponent(id)).subscribe(value => {
+            console.log(value)
+            this.subscribers.forEach(sub => {
+                sub.onEvent(new GetRoomEvent(value.content), null)
+            })
+        })
     }
 
     getDashboard(): DashboardTile[] {

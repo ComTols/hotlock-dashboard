@@ -1,1 +1,18 @@
-<p>room works!</p>
+<header>
+	<button class="icon" mat-icon-button (click)="_location.back();">
+		<mat-icon>arrow_back</mat-icon>
+	</button>
+	<h1>{{backend.activeSchool?.name}}: {{backend.activeRoom?.nr}}</h1>
+	<span class="spacer"></span>
+	<button class="icon" mat-icon-button>
+		<mat-icon>edit</mat-icon>
+	</button>
+</header>
+<mat-grid-list cols="4" rowHeight="200px">
+	<mat-grid-tile *ngFor="let tile of tiles, index as i"
+	               [colspan]="tile.size? tile.size.col : 1"
+	               [rowspan]="tile.size? tile.size.row : 1"
+	>
+		<div [chart]="charts[i]" class="chart"></div>
+	</mat-grid-tile>
+</mat-grid-list>

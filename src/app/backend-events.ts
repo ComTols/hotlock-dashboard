@@ -14,49 +14,59 @@ export class AddressToCoordinatesEvent extends BackendEvent {
     }
 }
 
-export class GetSchoolsEvent extends BackendEvent{
+export class GetSchoolsEvent extends BackendEvent {
     public schools: School[]
 
     constructor(s: School[]) {
-      super();
-      this.schools = s;
+        super();
+        this.schools = s;
     }
 }
 
-export class GetSchoolEvent extends BackendEvent{
+export class GetSchoolEvent extends BackendEvent {
     public school: School
 
     constructor(s: School) {
-      super();
-      this.school = s;
+        super();
+        this.school = s;
     }
 }
 
-export class GetGebaeudeEvent extends BackendEvent{
+export class GetGebaeudeEvent extends BackendEvent {
     public gebaeude: Gebaeude[]
 
     constructor(g: Gebaeude[]) {
-      super();
-      this.gebaeude = g;
+        super();
+        this.gebaeude = g;
     }
 }
 
-export class GetEtageEvent extends BackendEvent{
+export class GetEtageEvent extends BackendEvent {
     public etages: Etage[]
 
     constructor(e: Etage[]) {
-      super();
-      this.etages = e;
+        super();
+        this.etages = e;
     }
 }
 
-export class GetRoomEvent extends BackendEvent{
+export class GetRoomsEvent extends BackendEvent {
     public rooms: Room[]
 
     constructor(r: Room[]) {
-      super();
-      this.rooms = r;
+        super();
+        this.rooms = r;
     }
 }
-export class LogInEvent extends BackendEvent{
+
+export class GetRoomEvent extends BackendEvent {
+    public room: Room
+
+    constructor(r: Room) {
+        super();
+        this.room = r;
+    }
+}
+
+export class LogInEvent extends BackendEvent {
 }
